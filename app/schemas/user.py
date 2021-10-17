@@ -5,8 +5,7 @@ from .business import BusinessOut
 
 class UserBase(BaseModel):
     email: EmailStr
-    first_name: str
-    last_name: str
+    name: str
     business_identity: str
 
     class Config:
@@ -14,13 +13,16 @@ class UserBase(BaseModel):
 
 
 class UserIn(UserBase):
-    password: str
+    pass
 
 
 class User(UserBase):
     id: int
     is_admin: bool
+    created_on: int
 
 
 class UserOut(UserBase):
+    created_on: int
+
     business: BusinessOut

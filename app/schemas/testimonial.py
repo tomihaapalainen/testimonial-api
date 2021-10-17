@@ -4,8 +4,8 @@ from pydantic import BaseModel
 
 
 class TestimonialBase(BaseModel):
-    name: str
-    title: Optional[str]
+    giver_name: str
+    giver_title: Optional[str]
     business_name: Optional[str]
     picture_url = Optional[str]
 
@@ -26,7 +26,9 @@ class Testimonial(TestimonialBase):
     business_id: int
     client_id: int
     is_accepted: bool
+    created_on: int
 
 
 class TestimonialOut(TestimonialBase):
     is_accepted: bool
+    created_on: int

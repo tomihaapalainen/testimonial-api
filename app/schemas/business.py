@@ -23,9 +23,5 @@ class Business(BusinessBase):
     has_premium: bool
     created_on: int
 
-    users: List[UserOut]
-    testimonials = List[TestimonialOut]
-
-
 class BusinessOut(BusinessBase):
-    pass
+    created_on: int

@@ -23,6 +23,7 @@ def upgrade():
         sa.Column('name', sa.String),
         sa.Column('identity', sa.String),
         sa.Column('has_premium', sa.Boolean),
+        sa.Column('created_on', sa.Integer),
         sa.PrimaryKeyConstraint('id'))
 
     op.create_index(op.f('ix_business_id'), 'business', ['id'])

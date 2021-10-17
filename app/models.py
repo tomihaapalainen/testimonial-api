@@ -13,6 +13,10 @@ class Business(DatabaseBase):
     name = Column(String, index=True)
     identity = Column(String, unique=True, index=True)
     has_premium = Column(Boolean)
+    created_on = Column(Integer)
+
+    users = relationship('User', back_populates='user')
+    testimonials = relationship('Testimonial', backref='testimonial')
 
 
 class User(DatabaseBase):
@@ -22,9 +26,11 @@ class User(DatabaseBase):
     business_id = Column(Integer, ForeignKey('business.id', ondelete='CASCADE'))
 
     email = Column(String, index=True)
-    first_name = Column(String)
-    last_name = Column(String)
+    name = Column(String)
     is_admin = Column(Boolean)
+    created_on = Column(Integer)
+
+    business = relationship('Business', backref=backref('user', uselist=False))
 
 
 class Testimonial(DatabaseBase):
@@ -33,9 +39,10 @@ class Testimonial(DatabaseBase):
     id = Column(Integer, primary_key=True, index=True)
     business_id = Column(Integer, ForeignKey('business.id', ondelete='CASCADE'))
 
+    created_on = Column(Integer)
     is_accepted = Column(Boolean)
-    name = Column(String)
-    title = Column(String)
+    giver_name = Column(String)
+    giver_title = Column(String)
     business_name = Column(String)
     picture_url = Column(String)
     text = Column(String)
