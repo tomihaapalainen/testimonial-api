@@ -2,7 +2,7 @@ from typing import List
 
 from pydantic import BaseModel
 
-from .client import ClientOut
+from .testimonial import TestimonialOut
 from .user import UserOut
 
 
@@ -20,11 +20,11 @@ class BusinessIn(BusinessBase):
 
 class Business(BusinessBase):
     id: int
-    is_subscribed: bool
+    has_premium: bool
     created_on: int
 
     users: List[UserOut]
-    clients: List[ClientOut]
+    testimonials = List[TestimonialOut]
 
 
 class BusinessOut(BusinessBase):

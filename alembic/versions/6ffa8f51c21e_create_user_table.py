@@ -29,8 +29,9 @@ def upgrade():
         sa.ForeignKeyConstraint(['business_id'], ['business.id'], ondelete='cascade'),
         sa.UniqueConstraint('email'))
 
-    op.create_index(op.f('ix_user_id'), 'user', ['id'], unique=True)
+    op.create_index(op.f('ix_user_id'), 'user', ['id'])
+    op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
 
 
 def downgrade():
-    pass
+    op.drop_table('user')

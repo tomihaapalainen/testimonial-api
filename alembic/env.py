@@ -16,8 +16,8 @@ load_dotenv()
 config = context.config
 
 section = config.config_ini_section
-config.set_section_option(section, "PSSQL_USERNAME", os.environ.get("PSSQL_USERNAME"))
-config.set_section_option(section, "PSSQL_PASSWORD", os.environ.get("PSSQL_PASSWORD"))
+config.set_section_option(section, "DB_USERNAME", os.environ.get("DB_USERNAME"))
+config.set_section_option(section, "DB_PASSWORD", os.environ.get("DB_PASSWORD"))
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.

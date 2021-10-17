@@ -12,7 +12,7 @@ class Business(DatabaseBase):
 
     name = Column(String, index=True)
     identity = Column(String, unique=True, index=True)
-    is_subscribed = Column(Boolean)
+    has_premium = Column(Boolean)
 
 
 class User(DatabaseBase):
@@ -27,21 +27,11 @@ class User(DatabaseBase):
     is_admin = Column(Boolean)
 
 
-class Client(DatabaseBase):
-    __tablename__ = 'client'
-
-    id = Column(Integer, primary_key=True, index=True)
-    business_id = Column(Integer, ForeignKey('business.id', ondelete='CASCADE'))
-
-    name = Column(String)
-    identity = Column(String)
-
-
 class Testimonial(DatabaseBase):
     __tablename__ = 'testimonial'
 
     id = Column(Integer, primary_key=True, index=True)
-    client_id = Column(Integer, ForeignKey('business.id', ondelete='CASCADE'))
+    business_id = Column(Integer, ForeignKey('business.id', ondelete='CASCADE'))
 
     is_accepted = Column(Boolean)
     name = Column(String)

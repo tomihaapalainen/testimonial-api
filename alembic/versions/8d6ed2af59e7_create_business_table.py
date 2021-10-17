@@ -19,13 +19,13 @@ depends_on = None
 def upgrade():
     op.create_table(
         'business',
-        sa.Column('id', sa.Integer, primary_key=True, index=True),
-        sa.Column('name', sa.String, index=True),
-        sa.Column('identity', sa.String, unique=True, index=True),
-        sa.Column('is_subscribed', sa.Boolean),
+        sa.Column('id', sa.Integer),
+        sa.Column('name', sa.String),
+        sa.Column('identity', sa.String),
+        sa.Column('has_premium', sa.Boolean),
         sa.PrimaryKeyConstraint('id'))
 
-    op.create_index(op.f('ix_business_id'), 'business', ['id'], unique=True)
+    op.create_index(op.f('ix_business_id'), 'business', ['id'])
     op.create_index(op.f('ix_business_name'), 'business', ['name'])
     op.create_index(op.f('ix_business_identity'), 'business', ['identity'], unique=True)
 

@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
-DATABASE_URL = f"""\
-postgresql://{os.getenv("PSSQL_USERNAME")}:{os.getenv("PSSQL_PASSWORD")}@127.0.0.1:5432/testimonial\
-"""
+db_user = os.getenv("DB_USERNAME")
+db_pw = os.getenv("DB_PASSWORD")
+DATABASE_URL = f"postgresql://{db_user}:{db_pw}@127.0.0.1:5432/testimonial"
