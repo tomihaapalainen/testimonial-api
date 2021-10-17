@@ -6,14 +6,13 @@ from .business import BusinessOut
 class UserBase(BaseModel):
     email: EmailStr
     name: str
-    business_identity: str
 
     class Config:
         orm_mode = True
 
 
 class UserIn(UserBase):
-    pass
+    business_identity: str
 
 
 class User(UserBase):

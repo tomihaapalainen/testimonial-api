@@ -29,4 +29,7 @@ async def create_user(user_in: UserIn, db: Session = Depends(get_db)):
 async def read_user(
     user: User = Depends(get_current_user_by_token)
 ):
-    return dict(user);
+    return {
+        **dict(user),
+        'business': user.business
+    };

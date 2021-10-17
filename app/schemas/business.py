@@ -1,9 +1,4 @@
-from typing import List
-
 from pydantic import BaseModel
-
-from .testimonial import TestimonialOut
-from .user import UserOut
 
 
 class BusinessBase(BaseModel):
@@ -22,6 +17,7 @@ class Business(BusinessBase):
     id: int
     has_premium: bool
     created_on: int
+
 
 class BusinessOut(BusinessBase):
     created_on: int

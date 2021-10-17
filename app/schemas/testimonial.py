@@ -5,13 +5,13 @@ from pydantic import BaseModel
 
 class TestimonialBase(BaseModel):
     giver_name: str
-    giver_title: Optional[str]
-    business_name: Optional[str]
-    picture_url = Optional[str]
+    giver_title: Optional[str] = None
+    business_name: Optional[str] = None
+    picture_url: Optional[str] = None
 
-    text: Optional[str]
-    audio_url: Optional[str]
-    video_url: Optional[str]
+    text: Optional[str] = None
+    audio_url: Optional[str] = None
+    video_url: Optional[str] = None
 
     class Config:
         orm_mode = True
