@@ -11,7 +11,7 @@ from app.schemas.business import BusinessIn
 
 def create(db: Session, business_in: BusinessIn):
     timestamp = round(time.time())
-    db_business = Business(**dict(business_in), created_on=timestamp)
+    db_business = Business(**business_in.dict(), created_on=timestamp)
     db.add(db_business)
     db.commit()
     db.refresh(db_business)

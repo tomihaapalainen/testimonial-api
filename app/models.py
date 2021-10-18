@@ -1,4 +1,4 @@
-from sqlalchemy.orm import backref, relationship
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import Column, ForeignKey
 from sqlalchemy.sql.sqltypes import Boolean, Integer, String
 
@@ -15,8 +15,8 @@ class Business(DatabaseBase):
     has_premium = Column(Boolean)
     created_on = Column(Integer)
 
-    users = relationship('User', back_populates='user')
-    testimonials = relationship('Testimonial', backref='testimonial')
+    users = relationship('User', back_populates='business')
+    testimonials = relationship('Testimonial')
 
 
 class User(DatabaseBase):
@@ -30,7 +30,7 @@ class User(DatabaseBase):
     is_admin = Column(Boolean)
     created_on = Column(Integer)
 
-    business = relationship('Business', backref=backref('user', uselist=False))
+    business = relationship('Business', back_populates='users')
 
 
 class Testimonial(DatabaseBase):
@@ -48,3 +48,5 @@ class Testimonial(DatabaseBase):
     text = Column(String)
     audio_url = Column(String)
     video_url = Column(String)
+
+    business = relationship('Business', back_populates='testimonials')

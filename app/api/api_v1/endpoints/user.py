@@ -13,10 +13,13 @@ from app.schemas.user import UserIn, UserOut
 router = APIRouter()
 
 
-@router.post('/', response_model=UserOut)
-async def create_user(user_in: UserIn, db: Session = Depends(get_db)):
+@router.post('/add', response_model=UserOut)
+async def create_user(
+    user_in: UserIn,
+    db: Session = Depends(get_db),
+    user: User = Depends(get_current_user_by_token)):
     try:
-        db_user = user_crud.create(db, user_in)
+        db_user = user_crud.create(db, user_in, user.business.id)
         return db_user
     except IntegrityError:
         db.rollback()
@@ -25,11 +28,13 @@ async def create_user(user_in: UserIn, db: Session = Depends(get_db)):
             detail=f'Unable to create user with email {user_in.email}.')
 
 
-@router.get('/', response_model=UserOut)
+@router.get('/data', response_model=UserOut)
 async def read_user(
     user: User = Depends(get_current_user_by_token)
 ):
     return {
-        **dict(user),
+        'email': user.email,
+        'name': user.name,
+        'created_on': user.created_on,
         'business': user.business
     };

@@ -9,9 +9,13 @@ from app.models import User
 from app.schemas.user import UserIn
 
 
-def create(db: Session, user_in: UserIn):
+def create(db: Session, user_in: UserIn, business_id: int, is_admin: bool = False):
     timestamp = round(time.time())
-    db_user = User(**dict(user_in), created_on=timestamp)
+    db_user = User(
+        **user_in.dict(),
+        business_id=business_id,
+        is_admin=is_admin,
+        created_on=timestamp)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

@@ -6,7 +6,6 @@ from sqlalchemy.orm import Session
 from app.crud import user_crud
 from app.db import get_db
 from app.firebase.admin import firebase_app
-from app.schemas.user import UserIn
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
@@ -26,12 +25,14 @@ async def get_current_user_by_token(
         username = data['email']
         user = await get_user_by_username(db, username=username)
         return user
-    except (auth.auth.ExpiredIdTokenError, auth.auth.RevokedIdTokenError):
+    except (auth.ExpiredIdTokenError, auth.RevokedIdTokenError) as ex:
+        print(ex)
         raise HTTPException(
             status_code=401,
             detail='ID token is expired or has been revoked. Please sign in again.',
             headers={'WWW-Authenticate': 'Bearer'})
-    except (auth.InvalidIdTokenError, ValueError):
+    except (auth.InvalidIdTokenError, ValueError) as ex:
+        print(ex)
         raise HTTPException(
             status_code=401,
             detail='Invalid ID token. Please sign in again.',

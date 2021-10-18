@@ -12,7 +12,7 @@ class UserBase(BaseModel):
 
 
 class UserIn(UserBase):
-    business_identity: str
+    pass
 
 
 class User(UserBase):
