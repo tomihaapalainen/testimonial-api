@@ -32,6 +32,11 @@ async def create_user(
 async def read_user(
     user: User = Depends(get_current_user_by_token)
 ):
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail=f'No data for user',
+            headers={'WWW-Authenticate': 'Bearer'})
     return {
         'email': user.email,
         'name': user.name,

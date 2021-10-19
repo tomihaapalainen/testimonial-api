@@ -1,6 +1,7 @@
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import Column, ForeignKey
 from sqlalchemy.sql.sqltypes import Boolean, Integer, String
+from sqlalchemy.dialects.postgresql import JSONB
 
 from .db import DatabaseBase
 
@@ -31,6 +32,16 @@ class User(DatabaseBase):
     created_on = Column(Integer)
 
     business = relationship('Business', back_populates='users')
+
+
+class TestimonialRequest(DatabaseBase):
+    __tablename__ = 'testimonialrequest'
+
+    id = Column(Integer, primary_key=True, index=True)
+    business_id = Column(Integer, ForeignKey('business.id', ondelete='CASCADE'))
+
+    created_on = Column(Integer)
+    questions = Column(JSONB)
 
 
 class Testimonial(DatabaseBase):
