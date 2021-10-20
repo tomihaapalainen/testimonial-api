@@ -1,14 +1,19 @@
 from pydantic import BaseModel
 
 
-class TestimonialRequestBase(BaseModel):
-    questions: str
+class TestimonialRequest(BaseModel):
+    id: int
+    business_id: int
+    public_id: str
+    created_on: int
 
     class Config:
         orm_mode = True
 
 
-class TestimonialRequest(TestimonialRequestBase):
-    id: int
-    business_id: int
-    created_on: int
+class TestimonialRequestOut(BaseModel):
+    public_id: str
+    business_name: str
+
+    class Config:
+        orm_mode = True

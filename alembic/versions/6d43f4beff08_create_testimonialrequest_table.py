@@ -21,11 +21,14 @@ def upgrade():
         'testimonialrequest',
         sa.Column('id', sa.Integer),
         sa.Column('business_id', sa.Integer),
-        sa.Column('questions', sa.dialects.postgresql.JSONB),
+        sa.Column('public_id', sa.String),
+        sa.Column('created_on', sa.Integer),
         sa.PrimaryKeyConstraint('id'),
-        sa.ForeignKeyConstraint(['business_id'], ['business.id'], ondelete='cascade'))
+        sa.ForeignKeyConstraint(['business_id'], ['business.id'], ondelete='cascade'),
+        sa.UniqueConstraint('public_id'))
 
     op.create_index(op.f('ix_testimonialrequest_id'), 'testimonialrequest', ['id'])
+    op.create_index(op.f('ix_testimonialrequest_public_id'), 'testimonialrequest', ['public_id'])
 
 
 def downgrade():

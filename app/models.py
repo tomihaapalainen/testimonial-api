@@ -1,7 +1,6 @@
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import Column, ForeignKey
 from sqlalchemy.sql.sqltypes import Boolean, Integer, String
-from sqlalchemy.dialects.postgresql import JSONB
 
 from .db import DatabaseBase
 
@@ -17,7 +16,8 @@ class Business(DatabaseBase):
     created_on = Column(Integer)
 
     users = relationship('User', back_populates='business')
-    testimonials = relationship('Testimonial')
+    testimonials = relationship('Testimonial', back_populates='business')
+    testimonial_requests = relationship('TestimonialRequest', back_populates='business')
 
 
 class User(DatabaseBase):
@@ -40,8 +40,10 @@ class TestimonialRequest(DatabaseBase):
     id = Column(Integer, primary_key=True, index=True)
     business_id = Column(Integer, ForeignKey('business.id', ondelete='CASCADE'))
 
+    public_id = Column(String, index=True, unique=True)
     created_on = Column(Integer)
-    questions = Column(JSONB)
+
+    business = relationship('Business', back_populates='testimonial_requests')
 
 
 class Testimonial(DatabaseBase):
