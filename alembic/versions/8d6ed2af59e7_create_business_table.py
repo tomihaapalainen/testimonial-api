@@ -22,7 +22,6 @@ def upgrade():
         sa.Column('id', sa.Integer),
         sa.Column('name', sa.String),
         sa.Column('identity', sa.String),
-        sa.Column('has_premium', sa.Boolean),
         sa.Column('created_on', sa.Integer),
         sa.PrimaryKeyConstraint('id'))
 

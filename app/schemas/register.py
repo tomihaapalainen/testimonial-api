@@ -17,7 +17,6 @@ class RegisterIn(RegisterBase):
 
 class Register(RegisterBase):
     id: int
-    has_premium: bool
     created_on: int
 
 

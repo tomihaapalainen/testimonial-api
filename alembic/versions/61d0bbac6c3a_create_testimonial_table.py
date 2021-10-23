@@ -27,7 +27,6 @@ def upgrade():
         sa.Column('business_name', sa.String),
         sa.Column('picture_url', sa.String),
         sa.Column('text', sa.String),
-        sa.Column('audio_url', sa.String),
         sa.Column('video_url', sa.String),
         sa.Column('created_on', sa.Integer),
         sa.PrimaryKeyConstraint('id'),

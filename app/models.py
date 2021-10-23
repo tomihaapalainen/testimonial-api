@@ -12,7 +12,6 @@ class Business(DatabaseBase):
 
     name = Column(String, index=True)
     identity = Column(String, unique=True, index=True)
-    has_premium = Column(Boolean)
     created_on = Column(Integer)
 
     users = relationship('User', back_populates='business')
@@ -58,8 +57,7 @@ class Testimonial(DatabaseBase):
     giver_title = Column(String)
     business_name = Column(String)
     picture_url = Column(String)
-    text = Column(String)
-    audio_url = Column(String)
-    video_url = Column(String)
+    text = Column(String, default='')
+    video_url = Column(String, default='')
 
     business = relationship('Business', back_populates='testimonials')

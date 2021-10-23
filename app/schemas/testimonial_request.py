@@ -14,6 +14,7 @@ class TestimonialRequest(BaseModel):
 class TestimonialRequestOut(BaseModel):
     public_id: str
     business_name: str
+    business_identity: str
 
     class Config:
         orm_mode = True

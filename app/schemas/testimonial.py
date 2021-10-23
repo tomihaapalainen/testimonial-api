@@ -5,12 +5,11 @@ from pydantic import BaseModel
 
 class TestimonialBase(BaseModel):
     giver_name: str
-    giver_title: Optional[str] = None
+    giver_title: str
     business_name: Optional[str] = None
     picture_url: Optional[str] = None
 
     text: Optional[str] = None
-    audio_url: Optional[str] = None
     video_url: Optional[str] = None
 
     class Config:
@@ -18,13 +17,12 @@ class TestimonialBase(BaseModel):
 
 
 class TestimonialIn(TestimonialBase):
-    pass
+    business_identity: str
 
 
 class Testimonial(TestimonialBase):
     id: int
     business_id: int
-    client_id: int
     is_accepted: bool
     created_on: int
 

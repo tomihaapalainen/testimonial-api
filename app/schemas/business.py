@@ -15,7 +15,6 @@ class BusinessIn(BusinessBase):
 
 class Business(BusinessBase):
     id: int
-    has_premium: bool
     created_on: int
 
 

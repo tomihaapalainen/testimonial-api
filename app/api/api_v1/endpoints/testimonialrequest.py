@@ -15,5 +15,6 @@ async def read_testimonial_request(request_id: str, db: Session = Depends(get_db
     db_testimonial_request = testimonialrequest_crud.read_by_public_id(db, request_id)
     return {
         'public_id': db_testimonial_request.public_id,
-        'business_name': db_testimonial_request.business.name
+        'business_name': db_testimonial_request.business.name,
+        'business_identity': db_testimonial_request.business.identity
     }

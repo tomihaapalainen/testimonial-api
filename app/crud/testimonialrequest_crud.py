@@ -29,7 +29,7 @@ def read_by_id(db: Session, testimonial_request_id: int):
         .first()
 
 
-def read_by_public_id(db: Session, public_id: int):
+def read_by_public_id(db: Session, public_id: str) -> TestimonialRequest:
     return db.query(TestimonialRequest).filter(TestimonialRequest.public_id == public_id).first()
 
 
