@@ -1,13 +1,17 @@
 import shutil
 import time
 
+from typing import List
+
 from fastapi import APIRouter, Depends, File, Response, UploadFile
 
 from sqlalchemy.orm import Session
 
 from app.crud import business_crud, testimonial_crud
 from app.db import get_db
-from app.schemas.testimonial import TestimonialIn
+from app.firebase.auth import get_current_user_by_token
+from app.models import User
+from app.schemas.testimonial import TestimonialIn, TestimonialOut
 
 
 router = APIRouter()
@@ -43,3 +47,8 @@ async def create_video(video: UploadFile = File(...)):
     return {
         'url': url
     }
+
+
+@router.get('/all', response_model=List[TestimonialOut])
+async def read_all_testimonials(user: User = Depends(get_current_user_by_token)):
+    return user.business.testimonials
