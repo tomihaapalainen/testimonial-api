@@ -32,3 +32,14 @@ async def create_image(image: UploadFile = File(...)):
     return {
         'url': url
     }
+
+
+@router.post('/video')
+async def create_video(video: UploadFile = File(...)):
+    timestamp = str(time.time()).replace('.', '')
+    url = f'{timestamp}.png'
+    with open(url, 'wb') as f:
+        shutil.copyfileobj(video.file, f)
+    return {
+        'url': url
+    }
