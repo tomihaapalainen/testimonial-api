@@ -140,3 +140,5 @@ cython_debug/
 .vscode/
 .env
 business-testimonials-firebase.json
+*.webm
+*.png
