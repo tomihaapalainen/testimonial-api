@@ -28,5 +28,11 @@ class Testimonial(TestimonialBase):
 
 
 class TestimonialOut(TestimonialBase):
+    id: int
     is_accepted: bool
     created_on: int
+
+
+class TestimonialUpdate(BaseModel):
+    id: int
+    is_accepted: bool

@@ -22,6 +22,10 @@ def create(db: Session, testimonial_in: TestimonialIn, business_id: int):
     return db_testimonial
 
 
+def read_by_id(db: Session, testimonial_id: int):
+    return db.query(Testimonial).filter(Testimonial.id == testimonial_id).first()
+
+
 def update(db: Session, testimonial: Testimonial, values: Dict[str, Any]):
     user_data = jsonable_encoder(testimonial)
 
