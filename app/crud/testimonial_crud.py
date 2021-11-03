@@ -3,6 +3,7 @@ import time
 from typing import Any, Dict
 
 from fastapi.encoders import jsonable_encoder
+from sqlalchemy import and_
 from sqlalchemy.orm import Session
 
 from app.models import Testimonial
@@ -24,6 +25,16 @@ def create(db: Session, testimonial_in: TestimonialIn, business_id: int):
 
 def read_by_id(db: Session, testimonial_id: int):
     return db.query(Testimonial).filter(Testimonial.id == testimonial_id).first()
+
+
+def read_accepted_by_business_id(db: Session, business_id: int):
+    return db.query(Testimonial)\
+        .filter(
+            and_(
+                Testimonial.business_id == business_id,
+                Testimonial.is_accepted == True
+            )
+        ).all()
 
 
 def update(db: Session, testimonial: Testimonial, values: Dict[str, Any]):

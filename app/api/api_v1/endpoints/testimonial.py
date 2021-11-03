@@ -56,6 +56,13 @@ async def read_all_testimonials(user: User = Depends(get_current_user_by_token))
     return user.business.testimonials
 
 
+@router.get('/business/{business_identity}', response_model=List[TestimonialOut])
+async def read_all_testimonials_by_business(business_identity: str, db: Session = Depends(get_db)):
+    db_business = business_crud.read_by_business_identity(db, business_identity)
+    db_testimonials = testimonial_crud.read_accepted_by_business_id(db, db_business.id)
+    return db_testimonials
+
+
 @router.post('/update', response_model=TestimonialOut)
 async def update_testimonial(
     testimonial_update: TestimonialUpdate,
